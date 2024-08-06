@@ -1,0 +1,279 @@
+---
+title: "Stats 13 Discussion 1"
+author: "Daniel Chen"
+date: "2024-08-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Discussion 1
+This is not a coding class, although we will learn how to do statistical analysis using R code. This means that what we learn in class will not comprehensively cover everything you can do using R. Furthermore, there may be many ways to complete a task using R differently than what is shown in class. You should be able to easily Google any questions or errors related to coding in R. If that does not work for you, you are also free to ask me.
+
+##Variables
+Create a variable named `my_birth_year` with a value equal to the year you were born. Run the code below by clicking on the green triangle in the upper right corner of the block. Or click on the line of code you want to run and press Ctrl + Enter (Command + Enter for Mac).
+
+Notice that the variable will show up in the environment panel on the upper right section of your screen
+
+```{r}
+# Example:
+# my_birth_year = 2000
+
+# Fill in the your own birth year below
+my_birth_year = 
+```
+
+You can now perform math by using the variable which contains a numerical value. Calculate your age by subtracting `my_birth_year`. Run the code block below
+
+```{r}
+2024 - my_birth_year
+```
+
+We can save your age by assigning the above expression to a new variable called `my_age`. Once you run the code block below, the variable `my_age` should show up in the environment panel.
+
+```{r}
+my_age = 2024 - my_birth_year
+```
+
+## Vectors
+Variables can hold more than one value. A vector holds multiple values of the same type. Create a vector of your three favorite TV shows named `my_fav_shows` by following my example below.   
+
+By putting the names of the TV shows in quotation marks, we are letting R know that the words in the quotations should be interpreted as character data rather than as a variable name.   
+
+The `c()` function is how vectors are created in R.  
+
+Once you fill in the code block below and run it, you should see the variable `my_fav_shows` show up in your environment with the list you created as the value. 
+
+```{r}
+# Example:
+# my_fav_shows = c("Avatar the Last Airbender", "The Good Place", "Brooklyn 99")
+my_fav_shows = 
+```
+
+Create another vector called `my_nums` that contains any ten random numbers and run the code.  
+
+```{r}
+my_nums = 
+```
+
+If you only want to use one value from your vector, you can extract the value by telling R which index your value is at. Get the 3rd value from `my_nums`.  
+
+```{r}
+my_nums[3]
+```
+
+## For loops
+For loops are a way to repeat a task without having to run a new line of code each time the task needs to be completed. For example, let us print out all our favorite TV shows. We could do this by typing `print()` three times:  
+
+```{r}
+print(my_fav_shows[1])
+print(my_fav_shows[2])
+print(my_fav_shows[3])
+```
+
+Or we can use a for loop. The top line of code says that the variable `show` will take on each value in the vector `my_fav_shows`. The code inside of the curly braces is the action that will be repeated for each value of `show`. 
+
+```{r}
+for(show in my_fav_shows) {
+  print(show)
+}
+```
+
+
+Suppose we need to find the mean of `my_nums`. The average is taken by adding all the numbers up and dividing by the total count.
+
+Instead of writing out the sum of 10 numbers, we can use a for loop to perform this addition automatically.
+
+```{r}
+# Start with 0, we will use this variable to keep track of the sum of our numbers
+total = 0
+# The for loop will repeat the action of adding the next number to the current total
+for(num in my_nums) {
+  total = total + num
+}
+total/10
+```
+
+We can check our answer by using the built in `mean()` function
+
+```{r}
+mean(my_nums)
+```
+
+## Boolean values
+Variables can have values equal to `TRUE` or `FALSE`. However, you can also treat any `TRUE` as equal to 1 and any `FALSE` as equal to 0.
+
+```{r}
+x = TRUE
+y = FALSE
+z = TRUE
+# This is equivalent to 1 + 1 - 0
+x - y + z
+```
+
+
+## Comparision operators
+R can evaluate whether statements are true of false using the logical operators, e.g. >, <, ==, <=, >=, !=.
+
+```{r}
+# > is the greater than operator
+# This should be true
+5 > 3
+```
+```{r}
+# < is the less than operator
+# This should be false
+5 < 5
+```
+```{r}
+# == is the equality operator
+# This should be true
+5 == 5
+```
+```{r}
+# <= is less than or equal to
+# This should be true
+5 <= 5
+```
+```{r}
+# >= is greater than or equal to
+# This should be false
+5 >= 4
+```
+```{r}
+# != is not equal to
+# This should be true
+5 != 4
+```
+
+## Vectorized operations
+You can use vectors to quickly perform math operations on every element in the vector. Here are two examples
+
+```{r}
+# Divide every number in my_nums by 100
+my_nums / 100
+```
+
+```{r}
+# Evaluate whether each number in my_nums is great than 5
+my_nums > 5 
+```
+
+##Simulated Distribution of a fair coin
+After running the following code block, we should have 10000 simulations of flipping a coin 8 times and calculating the proportion of heads.
+
+```{r}
+# probability of heads
+prob_heads = 0.5
+# sample size
+n_samples = 8
+# number of simulations
+n_sims = 10000
+# Create a vector of 10000 zeros. We will store the result of each simulation in this vector  
+simulated_proportions = rep(0,n_sims)
+# Run a simulation of flipping 8 coins 10000 times.
+for(i in 1:n_sims){ 
+  # uniformly sample 8 values between 0 and 1
+  sample_i = runif(n_samples) 
+  # Determine whether each value in the sample is less than or 0.5
+  # Any value less than 0.5 will be evaluated as TRUE which we count as a Heads
+  # Any value greater than or equal to 0.5 will be evaluated as FALSE which we count as Tails
+  coin_flip_results = (sample_i < prob_heads) 
+  # The mean of a list of 1s and 0s is mathematically equivalent to the proportion of 1s
+  # In this step all we are doing is calculating the proportion of values in our sample of 8 that resulted in heads
+  simulated_proportions[i] = mean(coin_flip_results) 
+}
+```
+
+We can visualize the result of these simulations by creating a histogram
+
+```{r}
+hist(simulated_proportions, breaks = seq(-1/8, 1, 1/8) + 1/16, main = "Proportion of heads in 10000 simulations of 8 coin flips")
+```
+
+##Theoretical distribution of a fair coin
+
+The distribution that describes the number of heads in a sample of coin flips is called a binomial distribution. 
+
+```{r}
+plot(0:8, dbinom(0:8, size = 8, prob = 0.5), type = 'h', ylab = "probability", xlab = "# of heads", main = "Probability of observing x heads in 8 coin flips")
+```
+
+## Compare simulation proportions and theoretical proportions
+Proportion of simulations that resulted in each number of heads
+
+```{r}
+table(simulated_proportions * 8)/10000
+```
+
+True probability of obtaining each number of heads
+
+```{r}
+dbinom(0:8, size = 8, prob = 0.5)
+```
+
+##Theoretical distribution of Z values
+
+```{r}
+#Create a sequence of 100 equally spaced numbers between -4 and 4
+x <- seq(-4, 4, length=100)
+
+#create a vector of values that shows the height of the probability distribution
+#for each value in x
+y <- dnorm(x)
+
+#plot x and y as a scatterplot with connected lines (type = "l") and add
+#an x-axis with custom labels
+plot(x,y, type = "l", lwd = 2, axes = FALSE, xlab = "", ylab = "")
+axis(1, at = -3:3, labels = c("-3s", "-2s", "-1s", "mean", "1s", "2s", "3s"))
+
+#Observed value is Z = -2.041242
+abline(v = -2.041242, col = "red", lwd = 3)
+```
+
+The probability of observing a Z value of -2.041242 or less is equal to the area under the curve left of the red line. We can calculate it using the R function `pnorm`
+
+```{r}
+pnorm(-2.041242)
+```
+
+## Simulated distribution
+We repeat the same code as above and only change a few values. For our null hypothesis probability of heads (Which represents probability of random person chosen sleeping less than 7 hours) is equal to 0.4. The sample size is now 100.
+
+```{r}
+# probability of heads
+prob_heads = 0.4
+# sample size
+n_samples = 100
+# number of simulations
+n_sims = 10000
+# Create a vector of 10000 zeros. We will store the result of each simulation in this vector  
+simulated_proportions = rep(0,n_sims)
+# Run a simulation of flipping 8 coins 10000 times.
+for(i in 1:n_sims){ 
+  # uniformly sample 8 values between 0 and 1
+  sample_i = runif(n_samples) 
+  # Determine whether each value in the sample is less than or 0.5
+  # Any value less than 0.5 will be evaluated as TRUE which we count as a Heads
+  # Any value greater than or equal to 0.5 will be evaluated as FALSE which we count as Tails
+  coin_flip_results = (sample_i < prob_heads) 
+  # The mean of a list of 1s and 0s is mathematically equivalent to the proportion of 1s
+  # In this step all we are doing is calculating the proportion of values in our sample of 8 that resulted in heads
+  simulated_proportions[i] = mean(coin_flip_results) 
+}
+```
+
+```{r}
+hist(simulated_proportions)
+abline(v = .3, col = "red", lwd = 3)
+```
+
+The proportion of simulated samples of 100 where 30 percent or less people slept less than 7 hours can be calculated
+
+```{r}
+mean(simulated_proportions <= 0.3)
+```
+
+
