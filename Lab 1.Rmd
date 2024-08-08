@@ -76,7 +76,7 @@ Run the `getwd()` function to show that your current working directory is now th
 getwd()
 ```
 
-Problem 6: Download the file AgeBMI.txt from the disscussion section website and save it to the "Stats 13" folder. To load the data into RStudio, run the following code chunk.
+Problem 6: Download the file "AgeBMI.txt" from the disscussion section website and save it to the "Stats 13" folder. To load the data into RStudio, run the following code chunk.
 
 ```{r}
 AgeBMI = read.table("AgeBMI.txt", header = TRUE)
@@ -113,7 +113,7 @@ Problem 11: Using the `table()` function we can tabulate the results of our comp
 
 ```
 
-
+Submission instruction: Click "Knit" at the top of the screen. Check your stats folder for the file "Lab 1.html". You can submit this file to Gradescope.
 
 
 
