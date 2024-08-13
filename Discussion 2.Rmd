@@ -1,0 +1,71 @@
+---
+title: "Discussion 2"
+author: "Daniel Chen"
+date: "2024-08-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Discussion 2
+
+##Practice Problem (2.3.14)
+In this example we will see how to mitigate type I and type II error. The CDC wishes to sample a population to determine whether less than 90 percent of the US population has contracted chicken pox. Suppose the true proportion of people who have contracted chicken pox is actually 85 percent (Unknown to the CDC). The CDC sample 100 people from the population and determine how many of them have contracted chicken pox. This sample is simulated in code.
+
+```{r}
+# This makes sure that the random number generator produces the same outcome each time
+set.seed(123)
+
+num_samples = 100
+
+# The number of people who have contracted chicken pox from a single sample of 100 people where the true probability of success is 0.85.
+num_contracted = rbinom(1, num_samples, prob = 0.85)
+num_contracted
+```
+What is the alternative hypothesis?  
+
+Based on the null hypothesis that 90 percent of the US population have contracted chicken pox, is the result of the simulated sample enough to reject the null hypothesis?  
+
+Calculate the p value using a theory based test to determine the answer.
+```{r}
+# Fill in the following three variables based on the information given in the question
+observed = 
+expected = 
+SE = 
+# Code for calculation of z and one sided p value 
+z = (observed - expected)/SE
+pval = pnorm(z)
+# Print p value
+pval
+```
+
+Now change the code so that `num_samples` equals 1000 and run the code again. Does your conclusion change?
+
+## Code for Simulation perspective of Confidence intervals
+
+
+```{r}
+num_flips = 30
+num_heads = 12
+p = num_heads/num_flips
+se = sqrt(p * (1 - p) / num_flips)
+c(p-1.96*se, p+1.96*se)
+```
+
+```{r}
+in_conf_int = numeric(10000)
+for(i in 1:10000){
+  num_flips = 30
+  num_heads = rbinom(1, 30, prob = 0.5)
+  p = num_heads/num_flips
+  se = sqrt(p * (1 - p) / num_flips)
+  in_conf_int[i] = 0.5 >= (p-1.96*se) & 0.5 <= (p+1.96*se)
+}
+mean(in_conf_int)
+```
+```{r}
+barplot(table(in_conf_int)/10000, main = "Confidence Interval contains 0.5")
+```
+
