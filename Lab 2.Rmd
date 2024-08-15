@@ -21,7 +21,9 @@ library(openintro)
 # Print the girls column/feature/attribute of the arbuthnot dataframe.
 
 # Insert code for Exercise 1 here
-
+data("arbuthnot")
+glimpse(arbuthnot)
+arbuthnot$girls
 ```
 
 
@@ -34,7 +36,9 @@ library(openintro)
 # Insert code for Exercise 2 here
 # geom_point() -> scatterplots
 # geom_line() -> line graph
-
+ggplot(data = arbuthnot, mapping = aes(x = year, y = girls)) +
+  geom_point() +
+  geom_line()
 ```
 
 
@@ -47,7 +51,9 @@ library(openintro)
 # Make a line graph plot using the arbuthnot dataframe, with year on the x-axis and boy_ratio on the y-axis.
 
 # Insert code for Exercise 3 here
-
+arbuthnot = arbuthnot %>%
+  mutate(total = boys + girls) %>%
+  mutate(boy_ratio = boys / total)
 ```
 
 
@@ -60,7 +66,10 @@ library(openintro)
 # Print the column names of the present dataframe.
 
 # Insert code for Exercise 4 here
-
+data("present")
+unique(present$year)
+dim(present)
+colnames(present)
 ```
 
 
@@ -86,7 +95,7 @@ library(openintro)
 # Make a line graph plot using the present dataframe, with year on the x-axis and boy_ratio on the y-axis.
 
 # Insert code for Exercise 6 here
-
+present = present %>% mutate(total = boys + girls)
 ```
 
 
@@ -97,7 +106,7 @@ library(openintro)
 # and print the result.
 
 # Insert code for Exercise 7 here
-
+present %>% arrange(desc(total))
 ```
 
 ```{r submission-instructions}
