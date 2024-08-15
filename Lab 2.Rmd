@@ -1,0 +1,105 @@
+---
+title: "Lab 2: Intro to R"
+author: "Eric Fischer"
+date: "8/8/2024"
+output: pdf_document
+---
+
+```{r load-packages, message=FALSE}
+# Load the tidyverse and openintro packages, or libraries.
+
+# Insert code for Exercise 0 here (already done for you)
+library(tidyverse)
+library(openintro)
+```
+
+### Exercise 1
+
+```{r view-girls-counts}
+# Print the arbuthnot dataframe, available to us from the openintro package.
+# Take a glimpse() of the arbuthnot dataframe.
+# Print the girls column/feature/attribute of the arbuthnot dataframe.
+
+# Insert code for Exercise 1 here
+
+```
+
+
+### Exercise 2
+
+```{r trend-girls}
+# Make a ggplot() using the arbuthnot dataframe, with year on the x-axis and girls on the y-axis.
+# (Ensure the plot is a combined scatterplot and line graph.)
+
+# Insert code for Exercise 2 here
+# geom_point() -> scatterplots
+# geom_line() -> line graph
+
+```
+
+
+### Exercise 3
+
+```{r plot-prop-boys-arbuthnot}
+# Mutate() the arbuthnot dataframe in memory such that it has 2 new columns/features/attributes,
+# total (boys + girls) and boy_ratio (boys / total).
+# Make a line graph plot using the arbuthnot dataframe, with year on the x-axis and total on the y-axis.
+# Make a line graph plot using the arbuthnot dataframe, with year on the x-axis and boy_ratio on the y-axis.
+
+# Insert code for Exercise 3 here
+
+```
+
+
+### Exercise 4
+
+```{r dim-present}
+# Print the unique() values of the year column/feature/attribute of the present dataframe (e.g., present$year),
+# available to us from the openintro package.
+# Print the dimensions of the present dataframe.
+# Print the column names of the present dataframe.
+
+# Insert code for Exercise 4 here
+
+```
+
+
+### Exercise 5
+
+```{r count-compare}
+# Print the mean of the boys column/feature/attribute of the present dataframe, divided by
+# the mean of the boys column/feature/attribute of the arbuthnot dataframe.
+# Print the mean of the girls column/feature/attribute of the present dataframe, divided by
+# the mean of the girls column/feature/attribute of the arbuthnot dataframe.
+
+# Insert code for Exercise 5 here
+
+```
+
+
+### Exercise 6
+
+```{r plot-prop-boys-present}
+# Mutate() the present dataframe in memory such that it has 2 new columns/features/attributes,
+# total (boys + girls) and boy_ratio (boys / total).
+# Make a line graph plot using the present dataframe, with year on the x-axis and total on the y-axis.
+# Make a line graph plot using the present dataframe, with year on the x-axis and boy_ratio on the y-axis.
+
+# Insert code for Exercise 6 here
+
+```
+
+
+### Exercise 7
+
+```{r find-max-total}
+# Arrange() in descending order using desc() the total column/feature/attribute of the present dataframe,
+# and print the result.
+
+# Insert code for Exercise 7 here
+
+```
+
+```{r submission-instructions}
+# Knit (or generate) the R Markdown file into a PDF and submit both this .Rmd file and the PDF.
+```
