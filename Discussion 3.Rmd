@@ -1,0 +1,60 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Discussion 3
+
+## Practice Problem (3.CE.27)
+
+Construct a 99% Confidence interval based on the answer you selected in part (a)   
+1. Are validity conditions met to use a theory based confidence interval?    
+2. Are we using a z or a t statistic to calculate the margin of error?  
+3. Fill in the code below to construct the 99 percent confidence interval (You can use R or look in the slides to find a z or t score associated with the 99 percent confidence interval)
+```{r}
+qnorm()
+```
+
+
+```{r}
+# Fill in the observed proportion of respondents that claim they give more emotional support than they receive
+p_hat = .44
+# Calculate the standard error
+SE = sqrt(.44 * (1 - .44)/767)
+# Assign the variable z or t with the value corresponding to a 99 percent confidence interval
+z = qnorm(.995)  
+t = qt(.995, df = 767 - 1)
+# Calculate the margin of error
+ME_2 =  z * SE 
+# Print out the confidence interval
+c(p_hat - ME, p_hat + ME)
+```
+
+Calculate the margin of error for both surveys. How much larger does the sample size of the second survey need to be in order to have the same margin of error?
+
+```{r}
+# Calucate the margin of error of the survey you didn't choose in part a
+SE_1 = sqrt(.96 * (1 - .96)/4500)
+ME_1 = z * SE_1
+# Calcuate how many more samples are needed to make the two margin of errors similar to each other
+ME_2 / ME_1
+767 * (6.135689)^2
+```
+
+## Practice Problem (3.CE.23)
+
+Download the "MarriageAgesDiff.txt" file from the website and put it in your Stats 13 folder. Set your working directory to the Stats 13 folder (See Lab 1 for reminder on how to do that). Run the following line of code to load the data into your environment.
+
+```{r}
+marriage_age_diff = read.table("MarriageAgesDiff.txt", header = TRUE)
+```
+
+One way to visualize the data is a dot plot. This type of plot will show every individual data point of a quantitative variable. You can use `stripchart()` from base R, or you can use `geom_dotplot()` from from the `ggplot2` package
+
+```{r}
+stripchart(marriage_age_diff, method = "stack")
+```
+```{r}
+library(ggplot2)
+ggplot(data = marriage_age_diff, aes(x = Diff.H.W.)) + geom_dotplot() + ylim(0, 10)
+```
+
