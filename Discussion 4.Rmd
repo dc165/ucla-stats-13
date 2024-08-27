@@ -1,0 +1,90 @@
+---
+title: "Discussion 4"
+author: "Daniel Chen"
+date: "2024-08-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Discussion 4
+
+## How skewed is too skewed to satisfy validity conditions for theory based testing?
+
+Below, we have an skewed distribution. This is a Binomial(100, 0.003) distribution. Equivalently, these are the probabilities of observing a certain number of heads if you flipped a hundred coins each with a 0.3 percent chance of landing on heads.
+
+```{r}
+set.seed(123)
+X_sample = rbinom(1000000, 100, 0.003)
+hist(X_sample)
+```
+
+The central limit theorem states that if the sample size is large enough, or the distribution is not to skewed, then the sample mean will follow a normal distribution or a bell shaped curve.  
+
+The code below generates 10000 sample means from the above distribution. Test different sample sizes to see how large your sample size needs to be in order for the sample means to follow a bell shaped curve.
+
+```{r}
+# Fill in the sample size (Start with a small sample size like 5)
+sample_size = 
+X_bars = numeric(10000)
+
+for(i in 1:10000){
+  X_sample = rbinom(sample_size, 100, 0.003)
+  X_bars[i] = mean(X_sample)
+}
+
+hist(X_bars)
+```
+
+Now lets fix the sample size to 20, and change the skewness of the distribution instead which we will control by adjusting the probability of flipping a heads. How skewed can the data be while still satisfying the central limit theorem?
+
+```{r}
+# Change this variable to change the probability of flipping heads (See how small the probability can be while still satisfying the central limit theorem)
+pheads =
+
+# Print histogram of data distribution
+set.seed(123)
+X_sample = rbinom(1000000, 100, pheads)
+hist(X_sample)
+
+# Print histogram of sample means
+sample_size = 20
+X_bars = numeric(10000)
+
+for(i in 1:10000){
+  X_sample = rbinom(sample_size, 100, pheads)
+  X_bars[i] = mean(X_sample)
+}
+
+hist(X_bars)
+```
+
+## Practice Problem (6.3.21)
+A psychology study (Rutchick, Slepian, and Ferris, 2010) investigated whether using a red pen causes people to assign lower scores than using a blue pen.  
+
+A group of 128 students in an introductory undergraduate psychology class were asked to grade an eighth grader’s essay on a scale of 0–100. Half of the student graders were randomly assigned to use a red pen while grading the essay, and the other half were randomly assigned to use a blue pen.  
+
+Researchers reported that the group using a red pen gave an average score of 76.20, and the SD of the scores was 12.29. For the group using blue pens, the average score was 80.00, and the SD of the scores was 9.36.   
+
+Conduct a two sample t test and report the p value  
+
+```{r}
+# Calculate the observed statistic
+diff = 
+# Calculate the standard error
+SE =
+# Calculate the critical t value
+t = (diff - 0)/SE
+# Calculate the degrees of freedom
+df = 
+# Calculate the p value
+2 * pt(t, df, lower.tail = TRUE)
+```
+
+
+
+
+
+
