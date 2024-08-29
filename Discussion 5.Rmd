@@ -1,0 +1,109 @@
+---
+title: "Discussion 5"
+output: html_document
+date: "2024-08-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Discussion 5
+
+## Comparing two means
+We will use the `AgeBMI.txt` data to investigate the association between age and BMI.  
+
+First load the AgeBMI data into your environment.  
+```{r}
+agebmi = read.table("AgeBMI.txt", header = TRUE)
+```
+
+## Exploratory data analysis
+Exploratory data analysis or EDA is commonly the first step a data scientist will perform when they first obtain a new data set.  
+
+What kind of data is stored in `agebmi`? Are there any missing values? Are their any obvious trends in the data? Outliers?    
+These questions will help inform the next steps of your statistical analysis.  
+
+Since we have two quantitative variables, we can use a scatter plot to visualize any trends, or a histogram to visualize the distribution of each variable.  
+
+**Exercise 1**  
+First lets look at the histogram of age and the histogram of bmi. This will tell us the range of data we are working with as well as the distribution of the columns. Use the `ggplot()` and `geom_histogram()` functions to make your plots.  
+
+```{r}
+
+```
+
+**Exercise 2**  
+Use `ggplot()` and the `geom_point()` function to create a scatter plot with age as the x axis and BMI as the y axis.  
+Is there an obvious trend in the scatter plot? Add a regression line using `geom_smooth(method = "lm")`. What is the trend in the data?
+
+```{r}
+
+```
+
+**Exercise 3**  
+We can also try to visualize the association between age and bmi by spliting the observation into two categories, under 35 and over 35.  
+Use the `mutate()` function to add a new column to `agebmi` called `under_35` that contains `TRUE` if the age is less than or equal to 35 and `FALSE` otherwise.  
+
+```{r}
+
+```
+
+
+**Exercise 4**  
+Now we can make histogram or a box and whisker plot of bmi for each age category. (Hint: the `facet_wrap()` function lets you split your plots by categories)  
+
+```{r}
+ggplot(agebmi, aes(x = bmi)) + geom_histogram(bins = 20) + facet_wrap(~under_35, ncol = 1)
+ggplot(agebmi, aes(x = bmi)) + geom_boxplot() + facet_wrap(~under_35, ncol = 1)
+```
+
+## Statistical significance
+
+Now that the EDA has revealed some trends in the data, how can we tell if a trend is statistically significant?  
+Before moving onto the following exercise, identify a null and alternative hypothesis you wish to test.  
+
+**Exercise 5**  
+First let us try a theory based approach. Based on the EDA you performed, is it safe to perform a theory based test? Perform the test below anyway and report your conclusion based off of your result. (Hint: R has an inbuilt function called `t.test()`)  
+```{r}
+bmi_for_age_under_35 = 
+bmi_for_age_over_35 = 
+t.test(bmi_for_age_under_35, bmi_for_age_over_35, alternative = "less")
+```
+
+**Exercise 6**  
+Let us also perform a simulation based hypothesis test and check if we get the same result.  
+Since the null hypothesis is that the average bmi is the same for the under 35 and over 35 age groups, then under the null hypothesis we can randomly swap the age group assigned to each observed bmi and observe the same average BMI in each age group.  
+
+```{r}
+num_sims = 10000
+simulated_diffs = numeric(num_sims)
+for(i in 1:num_sims){
+  # Randomly pick out the age group assigned to each bmi
+  random_age_group = sample(agebmi$under_35, length(agebmi$under_35), replace = FALSE)
+  # Calculate the difference in mean bmi between the randomly assigned age groups
+  sim_diff = mean(agebmi$bmi[random_age_group]) - mean(agebmi$bmi[!random_age_group])
+  # Save the simulated difference
+  simulated_diffs[i] = sim_diff
+}
+hist(simulated_diffs)
+```
+
+What proportion of simulated difference in means were less than or equal to the observed difference in means?  
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
