@@ -1,0 +1,77 @@
+---
+title: "Discussion 6"
+output: html_document
+date: "2024-09-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Discussion 6
+
+## Practice Problem (10.3.15)
+
+Harris and Steudel (2002) studied factors that might be associated with the jumping performance of domestic cats. They studied 18 cats, using takeoff velocity (in centimeters per second) as the response variable. They used body mass (in grams), hind limb length (in centimeters), muscle mass (in grams), and percent body fat in addition to sex as potential explanatory variables. The data can be found in the CatJumping data file.  
+
+```{r}
+# Load the data
+catjumping = read.table("CatJumping.txt", header = TRUE)
+```
+
+
+a) Describe the association between these variables.  
+
+Use `ggplot()` to create a scatter plot. We can either use the formula to calculate the correlation coefficient, or we can use the `cor()` function to make R automatically calculate everything for us.
+
+```{r}
+# Create a scatter plot and calculate the correlation coefficient
+scatterplot = 
+scatterplot
+```
+
+b) Use R to determine the equation of the least squares line for predicting a cat’s takeoff velocity from its mass.  
+
+We can calculate the coefficients of the linear model using the formula, or we can use the `lm()` function to have R automatically calculate everything for us.  
+
+```{r}
+# First calculate the coefficients by formula
+
+
+# Compare your result with R
+model = lm(Velocity ~ Mass, data = catjumping)
+model
+```
+
+c. Interpret the value of the slope coefficient in this context.  
+
+d. Interpret the value of the intercept coefficient. Is this a context in which the intercept coefficient is meaningful?  
+
+e. Determine the proportion of variability in takeoff velocity that is explained by the least squares line with mass.  
+
+First lets visualize what this means by plotting the regression line and the average Velocity.  
+
+```{r}
+scatterplot + geom_smooth(method = "lm", formula = y~x, level = 0) + geom_abline(slope = 0, intercept = mean(catjumping$Velocity))
+```
+
+
+```{r}
+# Find the total variability in velocity
+total_var = 
+# Find the variability of the error in our velocity predictions
+error_var = 
+# The variability that is explained by the model is the total variability minus the variability of error
+model_var = total_var - error_var
+# Print the proportion of total variability that is explained by the model
+model_var / total_var
+```
+
+We can use the `summary()` function to get more information from our model. Can you find the proportion of variability explained by the model?
+
+```{r}
+summary(model)
+```
+
+
