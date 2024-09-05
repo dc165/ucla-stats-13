@@ -1,0 +1,81 @@
+---
+title: "Manipulating and Visualizing Dataframes"
+author: "Author Name"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+
+## Exercise 0
+```{r load-packages, message=FALSE}
+# Load the tidyverse and openintro packages.
+library(tidyverse)
+library(openintro)
+```
+
+
+## Exercise 1
+```{r}
+# Create a tibble dataframe using data() and the nycflights variable available to us from the openintro library.
+# Print the names() of nycflights.
+# Take a glimpse() of nycflights.
+```
+
+```{r}
+# Plot a histogram using ggplot and geom_histogram() of the dep_delay values from nycflights.
+# Plot another histogram in which you specify a better binwidth for interpreting the data than the default of 30.
+
+```
+
+```{r}
+# Plot a histogram using ggplot and geom_histogram() of the dep_delay values for flights that have a dest of "LAX" from nycflights.
+
+```
+
+```{r}
+# For the flights that have a dest of "LAX" from nycflights, summarise() in a table their mean departure delay, median departure delay, and their number.
+
+```
+
+## Exercise 2
+```{r}
+# For the flights that have a dest of "SFO" and month of 2 from nycflights, summarise() in a table their mean departure delay, median departure delay, and their number.
+
+```
+
+
+```{r}
+# For the flights that have a dest of "SFO" and month of 2 from nycflights, use group_by() to group them by their origin, and summarise() in a table their mean departure delay, median of their departure delay, IQR of their departure delay, and their number.
+```
+
+
+## Exercise 3
+```{r}
+# Plot a histogram using ggplot and geom_histogram() of the arr_delay values for flights that have a dest of "SFO" and month of 2 from nycflights.
+# For the flights that have a dest of "SFO" and month of 2 from nycflights, summarise() in a table their mean arrival delay, median of their arrival delay, IQR of their arrival delay, and their number.
+```
+
+
+## Exercise 4
+```{r}
+# Add a dep_type column/feature/attribute to the nycflights dataframe, such that the value is "on time" for a flight if its dep_delay is less than 5 and "delayed" if not.
+# Use group_by() to group nycflights by their origin, and summarise() in a table their on-time departure rate (calculated as sum(dep_type=="on time")/n()), arranged in descending order.
+# Plot a bar graph using ggplot and geom_bar() of the number of nycflights on the y-axis and origins on the x-axis (EWR, JFK, LGA), passing fill=dep_type as an argument to the aes() function call to fill/color your bar graph according to dep_type ("on time" or "delayed") and generate a corresponding legend.
+```
+
+
+## Exercise 5
+```{r exercise-8}
+# Plot a scatterplot using ggplot and geom_point() the average speed (distance / air_time) of nycflights on the y-axis and distance on the x-axis.
+# Is it a positive or negative relationship?
+# As distance increases, what happens to the average speed?
+# Does the average speed settle at any value?
+# Does the plot look linear, logarithmic, or exponential?
+```
+
+
+## Exercise 6
+```{r}
+# Filter() and overwrite in memory the nycflights dataframe such that it only has 3 carriers "AA", "DL", and "UA".
+# Plot a scatterplot using ggplot and geom_point() of arrival delays on the y-axis and departure delays on the x-axis, passing color=carrier as an argument to the aes() function call to fill/color your scatterplot according to carrier and generate a corresponding legend.
+```
